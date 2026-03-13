@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Time Machine — Emoji Signal Network</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a class="nav-brand" href="#hero">
+        <span class="brand-icon">⏱</span>
+        <span class="brand-text">Time<em>Machine</em></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#register">Get Your Number</a></li>
+        <li><a href="#signal">Signal Generator</a></li>
+        <li><a href="#directory">Directory</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#videos">Videos</a></li>
+        <li><a href="#social">Social</a></li>
+        <li><a href="#discuss">Discuss</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <canvas id="starCanvas"></canvas>
+    <div class="vortex-ring"></div>
+    <div class="vortex-ring vortex-ring--2"></div>
+    <div class="vortex-ring vortex-ring--3"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Hydrogen Host Signal Network</p>
+      <h1 class="hero-title">
+        Your Emoji<br/>
+        <span class="gradient-text">Phone Number</span><br/>
+        Lives Here
+      </h1>
+      <p class="hero-sub">
+        An 8-block emoji identifier unique to your device — call, receive, and connect
+        across the Time Machine network. No digits. No carrier. Pure signal.
+      </p>
+      <div class="hero-actions">
+        <a href="#register" class="btn btn--primary btn--xl">
+          <span class="btn-icon">✨</span> Claim Your Number
+        </a>
+        <a href="#signal" class="btn btn--ghost btn--xl">
+          <span class="btn-icon">📡</span> Open Signal Generator
+        </a>
+      </div>
+      <div class="hero-sample-number" id="heroSampleNumber">
+        <span>😎</span><span>🟦</span><span>👌</span><span>🟥</span>
+        <span>🎷</span><span>🟨</span><span>♣️</span><span>⬜</span>
+      </div>
+      <p class="hero-sample-label">Sample identifier — claim yours below ↓</p>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       FEATURE STRIP
+  ═══════════════════════════════════════════════ -->
+  <section class="feature-strip">
+    <div class="feature-strip-inner">
+      <div class="feature-pill">📡 Hydrogen Host Powered</div>
+      <div class="feature-pill">🔐 Device-Bound Identity</div>
+      <div class="feature-pill">🌐 Cross-Network Calls</div>
+      <div class="feature-pill">📈 Auto-Expanding Numbers</div>
+      <div class="feature-pill">⚡ Instant Click-to-Dial</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       REGISTER — GET YOUR EMOJI NUMBER
+  ═══════════════════════════════════════════════ -->
+  <section class="section section--dark" id="register">
+    <div class="container">
+      <div class="section-label">01 / YOUR IDENTITY</div>
+      <h2 class="section-title">Get Your <span class="gradient-text">Emoji Number</span></h2>
+      <p class="section-sub">
+        Every device on the Time Machine network gets a unique 8-block emoji identifier.
+        As the network grows, your number expands — always yours, always scannable.
+      </p>
+    </div>
+
+    <div class="register-stage">
+      <div class="register-card">
+        <div class="register-number-display" id="registerDisplay">
+          <div class="emoji-block-row" id="emojiRow">
+            <span class="emoji-block spin">⏳</span>
+          </div>
+          <p class="register-number-label" id="registerLabel">Generating your unique identifier…</p>
+        </div>
+
+        <div class="register-form" id="registerForm">
+          <label class="field-label" for="userHandle">Your Handle <span class="field-hint">(display name)</span></label>
+          <input type="text" id="userHandle" class="input" placeholder="e.g. GreenEngineer 🌻" maxlength="32" />
+
+          <label class="field-label" for="userBio">About You <span class="field-hint">(optional)</span></label>
+          <textarea id="userBio" class="input input--textarea" placeholder="Nature lover · Classical music · Horse enthusiast 🐴" rows="2" maxlength="120"></textarea>
+
+          <button class="btn btn--primary btn--full" id="claimBtn">
+            <span class="btn-icon">🚀</span> Claim This Number
+          </button>
+          <button class="btn btn--ghost btn--full" id="rerollBtn">
+            <span class="btn-icon">🔄</span> Generate Different Number
+          </button>
+        </div>
+
+        <div class="register-claimed hidden" id="registerClaimed">
+          <div class="claimed-badge">✅ Number Claimed!</div>
+          <p class="claimed-copy">Share your number — anyone on the network can tap it to dial you.</p>
+          <button class="btn btn--secondary" id="copyNumberBtn">
+            <span class="btn-icon">📋</span> Copy Number
+          </button>
+          <button class="btn btn--ghost" id="shareBtn">
+            <span class="btn-icon">🔗</span> Share Link
+          </button>
+        </div>
+      </div>
+
+      <div class="register-info">
+        <div class="info-block">
+          <div class="info-icon">🔑</div>
+          <h3>Device-Bound</h3>
+          <p>Your emoji number is derived from a unique fingerprint of your device. Return any time — it will always be the same.</p>
+        </div>
+        <div class="info-block">
+          <div class="info-icon">📈</div>
+          <h3>Auto-Expanding</h3>
+          <p>Start with 8 blocks. As more people join the network, a 9th and 10th block are appended automatically to keep everyone's number distinct.</p>
+        </div>
+        <div class="info-block">
+          <div class="info-icon">📡</div>
+          <h3>Hydrogen Host Ready</h3>
+          <p>Numbers are registered with the Hydrogen Host signal layer. Any device in the network can resolve and route calls using the emoji sequence alone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SIGNAL GENERATOR
+  ═══════════════════════════════════════════════ -->
+  <section class="section section--light" id="signal">
+    <div class="container">
+      <div class="section-label">02 / SIGNAL GENERATOR</div>
+      <h2 class="section-title">Tune Your <span class="gradient-text">Signal</span></h2>
+      <p class="section-sub">
+        Dial in your transmission frequency, waveform and power.
+        The Time Machine signal layer routes your call through the Hydrogen Host backbone.
+      </p>
+    </div>
+
+    <div class="signal-workspace">
+      <div class="signal-visualizer">
+        <canvas id="waveCanvas"></canvas>
+        <div class="signal-overlays">
+          <span class="signal-freq-readout" id="freqReadout">440 Hz</span>
+          <span class="signal-status" id="signalStatus">● READY</span>
+        </div>
+      </div>
+
+      <div class="signal-controls">
+        <div class="control-group">
+          <label class="ctrl-label">Waveform</label>
+          <div class="wave-selector" id="waveSelector">
+            <button class="wave-btn active" data-wave="sine">∿ Sine</button>
+            <button class="wave-btn" data-wave="square">⊓ Square</button>
+            <button class="wave-btn" data-wave="sawtooth">⊿ Saw</button>
+            <button class="wave-btn" data-wave="triangle">△ Triangle</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="ctrl-label">Frequency <span id="freqValue">440</span> Hz</label>
+          <input type="range" id="freqSlider" class="slider" min="20" max="2000" value="440" />
+        </div>
+
+        <div class="control-group">
+          <label class="ctrl-label">Amplitude <span id="ampValue">70</span>%</label>
+          <input type="range" id="ampSlider" class="slider" min="0" max="100" value="70" />
+        </div>
+
+        <div class="control-group">
+          <label class="ctrl-label">Modulation <span id="modValue">0</span></label>
+          <input type="range" id="modSlider" class="slider" min="0" max="100" value="0" />
+        </div>
+
+        <div class="signal-actions">
+          <button class="btn btn--primary" id="transmitBtn">
+            <span class="btn-icon">📡</span> Transmit
+          </button>
+          <button class="btn btn--danger hidden" id="stopBtn">
+            <span class="btn-icon">⏹</span> Stop
+          </button>
+          <button class="btn btn--ghost" id="scanBtn">
+            <span class="btn-icon">🔍</span> Scan Network
+          </button>
+        </div>
+
+        <div class="scan-result hidden" id="scanResult">
+          <div class="scan-title">📡 Devices In Range</div>
+          <div class="scan-list" id="scanList"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       DIRECTORY
+  ═══════════════════════════════════════════════ -->
+  <section class="section section--dark" id="directory">
+    <div class="container">
+      <div class="section-label">03 / NETWORK DIRECTORY</div>
+      <h2 class="section-title">The <span class="gradient-text">Directory</span></h2>
+      <p class="section-sub">
+        Every registered member of the Time Machine network. Click any emoji number to dial instantly.
+        Scan history lets you see who connected from which device.
+      </p>
+    </div>
+
+    <div class="dir-toolbar">
+      <input type="search" id="dirSearch" class="input input--search" placeholder="🔍  Search by handle or emoji…" />
+      <div class="dir-sort">
+        <button class="sort-btn active" data-sort="recent">Recent</button>
+        <button class="sort-btn" data-sort="name">Name</button>
+        <button class="sort-btn" data-sort="online">Online</button>
+      </div>
+    </div>
+
+    <div class="directory-list" id="directoryList">
+      <!-- Populated by JS -->
+    </div>
+
+    <div class="dir-load-more">
+      <button class="btn btn--ghost" id="loadMoreBtn">Load More Members</button>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       GALLERY
+  ═══════════════════════════════════════════════ -->
+  <section class="section section--gradient" id="gallery">
+    <div class="container">
+      <div class="section-label">04 / GALLERY</div>
+      <h2 class="section-title">Time Machine <span class="gradient-text">Moments</span></h2>
+      <p class="section-sub">
+        Snapshots from across the network — nature, technology, the cosmic overlap of the two.
+      </p>
+    </div>
+
+    <div class="gallery-hero-image">
+      <div class="gallery-hero-img" id="galleryHeroImg">
+        <div class="gallery-hero-overlay">
+          <span class="gallery-hero-emoji">🌌</span>
+          <p class="gallery-hero-caption">The Signal Nebula — Hydrogen Host transmission zone</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Populated by JS -->
+    </div>
+
+    <div class="gallery-lightbox hidden" id="lightbox">
+      <button class="lightbox-close" id="lightboxClose">✕</button>
+      <button class="lightbox-nav lightbox-nav--prev" id="lightboxPrev">‹</button>
+      <div class="lightbox-content" id="lightboxContent"></div>
+      <button class="lightbox-nav lightbox-nav--next" id="lightboxNext">›</button>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       VIDEOS
+  ═══════════════════════════════════════════════ -->
+  <section class="section section--dark" id="videos">
+    <div class="container">
+      <div class="section-label">05 / VIDEOS</div>
+      <h2 class="section-title">Watch the <span class="gradient-text">Network</span></h2>
+      <p class="section-sub">
+        Tutorials, transmissions and field recordings from the Time Machine community.
+      </p>
+    </div>
+
+    <div class="video-feature">
+      <div class="video-player-wrap">
+        <div class="video-player" id="featuredVideo">
+          <div class="video-placeholder">
+            <div class="play-btn" id="playFeatured">▶</div>
+            <div class="video-thumb-emoji">🛸</div>
+            <p class="video-thumb-title">How the Emoji Phone System Works</p>
+          </div>
+        </div>
+      </div>
+      <div class="video-feature-info">
+        <span class="video-tag">FEATURED</span>
+        <h3>How the Emoji Phone System Works</h3>
+        <p>
+          A complete walkthrough of device fingerprinting, emoji number generation,
+          the Hydrogen Host routing layer, and placing your first call.
+        </p>
+        <div class="video-meta">
+          <span>🕑 12 min</span>
+          <span>👁 4.2K views</span>
+          <span>📅 Mar 2026</span>
+        </div>
+        <button class="btn btn--primary" id="watchFeaturedBtn">
+          <span class="btn-icon">▶</span> Watch Now
+        </button>
+      </div>
+    </div>
+
+    <div class="video-grid" id="videoGrid">
+      <!-- Populated by JS -->
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SOCIAL
+  ═══════════════════════════════════════════════ -->
+  <section class="section section--light" id="social">
+    <div class="container">
+      <div class="section-label">06 / SOCIAL</div>
+      <h2 class="section-title">Connect <span class="gradient-text">Everywhere</span></h2>
+      <p class="section-sub">
+        Follow the Time Machine network across platforms. Share your emoji number. Grow the signal.
+      </p>
+    </div>
+
+    <div class="social-showcase">
+      <div class="social-card-big">
+        <div class="social-big-icon">🌿</div>
+        <h3>Post Your Number</h3>
+        <p>Share your 8-block emoji number on any platform — it's copy-pasteable, scannable and instantly recognizable.</p>
+        <div class="social-copy-row">
+          <div class="social-copy-number" id="socialMyNumber">Claim your number first ↑</div>
+          <button class="btn btn--primary btn--sm" id="socialCopyBtn">Copy</button>
+        </div>
+      </div>
+
+      <div class="social-platforms">
+        <a href="#" class="social-platform-tile" data-platform="twitter">
+          <span class="spt-icon">🐦</span>
+          <span class="spt-name">Twitter / X</span>
+          <span class="spt-cta">Follow →</span>
+        </a>
+        <a href="#" class="social-platform-tile" data-platform="instagram">
+          <span class="spt-icon">📸</span>
+          <span class="spt-name">Instagram</span>
+          <span class="spt-cta">Follow →</span>
+        </a>
+        <a href="#" class="social-platform-tile" data-platform="youtube">
+          <span class="spt-icon">📺</span>
+          <span class="spt-name">YouTube</span>
+          <span class="spt-cta">Subscribe →</span>
+        </a>
+        <a href="#" class="social-platform-tile" data-platform="discord">
+          <span class="spt-icon">💬</span>
+          <span class="spt-name">Discord</span>
+          <span class="spt-cta">Join →</span>
+        </a>
+        <a href="#" class="social-platform-tile" data-platform="github">
+          <span class="spt-icon">🐙</span>
+          <span class="spt-name">GitHub</span>
+          <span class="spt-cta">Star →</span>
+        </a>
+        <a href="#" class="social-platform-tile" data-platform="reddit">
+          <span class="spt-icon">🟠</span>
+          <span class="spt-name">Reddit</span>
+          <span class="spt-cta">Join →</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="social-feed-label">Recent posts from the community</div>
+    <div class="social-feed" id="socialFeed">
+      <!-- Populated by JS -->
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       DISCUSSION
+  ═══════════════════════════════════════════════ -->
+  <section class="section section--dark" id="discuss">
+    <div class="container">
+      <div class="section-label">07 / DISCUSSIONS</div>
+      <h2 class="section-title">Community <span class="gradient-text">Discussions</span></h2>
+      <p class="section-sub">
+        Ask questions, share discoveries, report signals. The floor is yours.
+      </p>
+    </div>
+
+    <div class="discuss-compose">
+      <div class="compose-avatar" id="composeAvatar">⏳</div>
+      <div class="compose-body">
+        <input type="text" id="discussTitle" class="input" placeholder="What's on your mind? Give it a title…" maxlength="80" />
+        <textarea id="discussBody" class="input input--textarea" placeholder="Expand on your thought, question, or discovery…" rows="3" maxlength="500"></textarea>
+        <div class="compose-actions">
+          <div class="compose-tags">
+            <button class="tag-btn active" data-tag="general">💬 General</button>
+            <button class="tag-btn" data-tag="signal">📡 Signal</button>
+            <button class="tag-btn" data-tag="numbers">🔢 Numbers</button>
+            <button class="tag-btn" data-tag="nature">🌿 Nature</button>
+            <button class="tag-btn" data-tag="music">🎵 Music</button>
+          </div>
+          <button class="btn btn--primary" id="postDiscussBtn">
+            <span class="btn-icon">📨</span> Post
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="discuss-threads" id="discussThreads">
+      <!-- Populated by JS -->
+    </div>
+
+    <div class="discuss-load-more">
+      <button class="btn btn--ghost" id="loadMoreThreads">Show More Discussions</button>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-icon">⏱</span>
+        <span class="brand-text">Time<em>Machine</em></span>
+        <p class="footer-tagline">Hydrogen Host Signal Network — Built for the future, rooted in nature.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Network</h4>
+          <a href="#register">Get Your Number</a>
+          <a href="#directory">Directory</a>
+          <a href="#signal">Signal Generator</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="#gallery">Gallery</a>
+          <a href="#videos">Videos</a>
+          <a href="#discuss">Discussions</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="#social">Social Links</a>
+          <a href="https://github.com/www-infinity/Time-Machine" target="_blank" rel="noopener">GitHub</a>
+          <a href="#discuss">Contact Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Time Machine — Hydrogen Host Network</span>
+      <span>🌿 Green Engineer Approved 🐴</span>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════
+       TOAST NOTIFICATIONS
+  ═══════════════════════════════════════════════ -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ═══════════════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════════ -->
+  <script src="js/hydrogen-host.js"></script>
+  <script src="js/phone.js"></script>
+  <script src="js/signal.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
